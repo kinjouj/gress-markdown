@@ -2,7 +2,6 @@ require "bundler/setup"
 Bundler.require
 
 require "simplecov"
-require "simplecov-tailwindcss"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
