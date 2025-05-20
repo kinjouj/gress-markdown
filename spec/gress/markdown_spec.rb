@@ -9,11 +9,11 @@ title: test
 
 test
 EOS
-    markdown = Gress::Markdown.parse(data)
-    expect(markdown.compact.size).to eq(2)
-    metadata = markdown.first
-    expect(metadata).not_to be_nil
-    body = markdown.last
-    expect(body).not_to be_nil
+    Gress::Markdown.parse(data) do |markdown|
+      expect(markdown.compact.size).to eq(2)
+      metadata, body = markdown
+      expect(metadata).not_to be_nil
+      expect(body).not_to be_nil
+    end
   end
 end
