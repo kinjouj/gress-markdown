@@ -5,15 +5,16 @@ describe Gress::Markdown do
     data =<<EOS
 ---
 title: test
+date: 2025-01-01 00:00:00
+categories:
+  - Test: test
 ---
 
 test
 EOS
-    Gress::Markdown.parse(data) do |markdown|
-      expect(markdown.compact.size).to eq(2)
-      metadata, body = markdown
-      expect(metadata).not_to be_nil
-      expect(body).not_to be_nil
-    end
+
+    metadata, body = Gress::Markdown.parse(data)
+    expect(metadata).not_to be_nil
+    expect(body).not_to be_nil
   end
 end
