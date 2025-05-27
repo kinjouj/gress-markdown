@@ -2,16 +2,11 @@ require "psych"
 
 module Gress
   class Markdown
-    def self.parse(data)
-      match = data.match(/\A(?<header>---\s*\n.*?\n?)^(---\s*$\n?)/m)
-      metadata = Psych.safe_load(
-        match[:header],
-        permitted_classes: [Date, Time, Symbol],
-        symbolize_names: true
-      )
+    def self.parse(txt, options={ symbolize_names: true, permitted_classes: [Date, Time, Symbol]})
+      match = txt.match(/\A(?<header>---\s*\n.*?\n?)^(---\s*$\n?)/m)
+      metadata = Psych.safe_load(match[:header], **options)
       body = match.post_match
-
-      return [ metadata, body ]
+      [ metadata, body ]
     end
   end
 end
